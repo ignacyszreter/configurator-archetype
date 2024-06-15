@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchetypeConfigurator", "ArchetypeConfigurator\ArchetypeConfigurator.csproj", "{065D6634-1A87-4ED7-B89B-FCAF4BE23DAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchetypeConfigurator.Tests", "ArchetypeConfigurator.Tests\ArchetypeConfigurator.Tests.csproj", "{7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{065D6634-1A87-4ED7-B89B-FCAF4BE23DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{065D6634-1A87-4ED7-B89B-FCAF4BE23DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{065D6634-1A87-4ED7-B89B-FCAF4BE23DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{065D6634-1A87-4ED7-B89B-FCAF4BE23DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
