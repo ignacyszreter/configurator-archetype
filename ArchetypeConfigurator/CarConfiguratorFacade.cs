@@ -5,17 +5,17 @@ public class CarConfiguratorFacade
     private static readonly DPLLSolver Solver = new DPLLSolver();
     private readonly List<IncludeRule> _includeRules = new List<IncludeRule>();
     private readonly List<ExcludeRule> _excludeRules = new List<ExcludeRule>();
-    
+
     public void AddIncludeRule(IncludeRule rule)
     {
         _includeRules.Add(rule);
     }
-    
+
     public void AddExcludeRule(ExcludeRule rule)
     {
         _excludeRules.Add(rule);
     }
-    
+
     public bool CanConfigureCar(IReadOnlyCollection<int> partIds)
     {
         var clauses = RulesAndPartsToClauses.ConvertRulesAndPartsToClauses(_includeRules, _excludeRules, partIds);
@@ -32,6 +32,7 @@ public record IncludeRule
     }
 
     public int Id { get; init; }
+    //only one of the required parts must be present
     public IReadOnlyCollection<int> RequiredParts { get; init; }
 }
 

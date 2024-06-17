@@ -4,16 +4,18 @@ public class DPLLSolver
 {
     public bool Solve(List<List<int>> clauses, Dictionary<int, bool> assignment)
     {
-        if (clauses.All(clause => clause.Any(literal => assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] == (literal > 0))))
+        if (clauses.All(clause => clause.Any(literal =>
+                assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] == (literal > 0))))
         {
             return true;
         }
 
-        if (clauses.Any(clause => clause.All(literal => assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] != (literal > 0))))
+        if (clauses.Any(clause => clause.All(literal =>
+                assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] != (literal > 0))))
         {
             return false;
         }
-        
+
         var unassigned = clauses.SelectMany(clause => clause)
             .Select(literal => Math.Abs(literal))
             .Distinct()
@@ -23,7 +25,7 @@ public class DPLLSolver
         {
             return false;
         }
-        
+
         var assignmentWithTrue = new Dictionary<int, bool>(assignment)
         {
             [unassigned] = true
@@ -33,7 +35,7 @@ public class DPLLSolver
         {
             return true;
         }
-        
+
         var assignmentWithFalse = new Dictionary<int, bool>(assignment)
         {
             [unassigned] = false

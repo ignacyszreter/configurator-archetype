@@ -2,7 +2,8 @@
 
 internal static class RulesAndPartsToClauses
 {
-    public static List<List<int>> ConvertRulesAndPartsToClauses(IReadOnlyCollection<IncludeRule> includeRules, IReadOnlyCollection<ExcludeRule> excludeRules, IReadOnlyCollection<int> partIds)
+    public static List<List<int>> ConvertRulesAndPartsToClauses(IReadOnlyCollection<IncludeRule> includeRules,
+        IReadOnlyCollection<ExcludeRule> excludeRules, IReadOnlyCollection<int> partIds)
     {
         var clauses = new List<List<int>>();
 
@@ -13,7 +14,7 @@ internal static class RulesAndPartsToClauses
             includeRuleClause.AddRange(includeRule.RequiredParts);
             clauses.Add(includeRuleClause);
         }
-        
+
         foreach (var excludeRule in excludeRules)
         {
             if (partIds.Contains(excludeRule.Id) && partIds.Contains(excludeRule.ExcludedPartId))
@@ -30,7 +31,7 @@ internal static class RulesAndPartsToClauses
                 allLiterals.Add(literal);
             }
         }
-        
+
         foreach (var literal in allLiterals)
         {
             if (partIds.Contains(literal))
@@ -42,7 +43,7 @@ internal static class RulesAndPartsToClauses
                 clauses.Add([-literal]);
             }
         }
-        
+
         return clauses;
     }
 }
