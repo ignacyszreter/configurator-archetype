@@ -49,6 +49,9 @@
       <None Update="TestCases\1Variable_2Clauses_UNSAT.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
+      <None Update="TestCases\23Variables_75Clauses_SAT.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

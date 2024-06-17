@@ -1,4 +1,4 @@
-﻿namespace ArchetypeConfigurator.V2;
+﻿namespace ArchetypeConfigurator;
 
 public class DPLLSolver
 {
@@ -6,17 +6,14 @@ public class DPLLSolver
     {
         if (clauses.All(clause => clause.Any(literal => assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] == (literal > 0))))
         {
-            // All clauses are satisfied
             return true;
         }
 
         if (clauses.Any(clause => clause.All(literal => assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] != (literal > 0))))
         {
-            // Some clause is unsatisfied
             return false;
         }
-
-        // Choose an unassigned variable
+        
         var unassigned = clauses.SelectMany(clause => clause)
             .Select(literal => Math.Abs(literal))
             .Distinct()
@@ -24,10 +21,9 @@ public class DPLLSolver
 
         if (unassigned == 0)
         {
-            return false; // No variable found, but clauses not satisfied
+            return false;
         }
-
-        // Try true
+        
         var assignmentWithTrue = new Dictionary<int, bool>(assignment)
         {
             [unassigned] = true
@@ -37,8 +33,7 @@ public class DPLLSolver
         {
             return true;
         }
-
-        // Try false
+        
         var assignmentWithFalse = new Dictionary<int, bool>(assignment)
         {
             [unassigned] = false

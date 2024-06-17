@@ -10,5 +10,7 @@
     &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestComplexUnsatScenario&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestAnotherComplexUnsatScenario&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.CarConfiguratorFacadeTests.TwoExcludingParts_CannotBeSatisfied&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.CarConfiguratorFacadeTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
