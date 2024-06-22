@@ -46,4 +46,25 @@ internal static class RulesAndPartsToClauses
 
         return clauses;
     }
+
+    public static List<List<int>> ConvertRulesToClauses(IReadOnlyCollection<IncludeRule> includeRules,
+        IReadOnlyCollection<ExcludeRule> excludeRules)
+    {
+        var clauses = new List<List<int>>();
+
+        foreach (var includeRule in includeRules)
+        {
+            var includeRuleClause = new List<int>();
+            includeRuleClause.Add(-includeRule.Id);
+            includeRuleClause.AddRange(includeRule.RequiredParts);
+            clauses.Add(includeRuleClause);
+        }
+
+        foreach (var excludeRule in excludeRules)
+        {
+            clauses.Add([-excludeRule.Id, -excludeRule.ExcludedPartId]);
+        }
+
+        return clauses;
+    }
 }

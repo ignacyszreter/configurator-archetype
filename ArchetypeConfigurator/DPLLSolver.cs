@@ -1,19 +1,19 @@
 ﻿namespace ArchetypeConfigurator;
 
-public class DPLLSolver
+public static class DPLLSolver
 {
-    public bool Solve(List<List<int>> clauses, Dictionary<int, bool> assignment)
+    public static Dictionary<int, bool>? Solve(List<List<int>> clauses, Dictionary<int, bool> assignment)
     {
         if (clauses.All(clause => clause.Any(literal =>
                 assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] == (literal > 0))))
         {
-            return true;
+            return assignment;
         }
 
         if (clauses.Any(clause => clause.All(literal =>
                 assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] != (literal > 0))))
         {
-            return false;
+            return null;
         }
 
         var unassigned = clauses.SelectMany(clause => clause)
@@ -23,7 +23,7 @@ public class DPLLSolver
 
         if (unassigned == 0)
         {
-            return false;
+            return null;
         }
 
         var assignmentWithTrue = new Dictionary<int, bool>(assignment)
@@ -31,9 +31,10 @@ public class DPLLSolver
             [unassigned] = true
         };
 
-        if (Solve(clauses, assignmentWithTrue))
+        var result = Solve(clauses, assignmentWithTrue);
+        if (result is not null)
         {
-            return true;
+            return result;
         }
 
         var assignmentWithFalse = new Dictionary<int, bool>(assignment)
