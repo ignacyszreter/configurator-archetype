@@ -8,12 +8,11 @@ internal static class TestVars
         var decisions = variables.Where(x => x.IsUserDecision).ToHashSet();
         foreach (var unassignedVariable in variables.Where(x => !decisions.Contains(x)))
         {
-            if (unassignedVariable.Value.HasValue) continue;
             var canBeTrue = TestSat.Exec(GetFormula(clauses, decisions), unassignedVariable.Literal, knownValues, disabledValues);
             var canBeFalse = TestSat.Exec(GetFormula(clauses, decisions), -unassignedVariable.Literal, knownValues, disabledValues);
             if (!canBeTrue && !canBeFalse) throw new InvalidOperationException("Literal is not satisfiable");
-            if (!canBeTrue) unassignedVariable.Set(false);
-            if (!canBeFalse) unassignedVariable.Set(true);
+            if (!canBeTrue && !unassignedVariable.Locked) unassignedVariable.Set(false);
+            if (!canBeFalse && !unassignedVariable.Locked) unassignedVariable.Set(true);
             if (canBeTrue && canBeFalse)
             {
                 unassignedVariable.UnlockAndReset();

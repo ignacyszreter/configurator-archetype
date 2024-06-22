@@ -35,11 +35,12 @@ internal class RealTests
     public void ShouldLockLiteral_IfItIsExcluded()
     {
         _carConfiguratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
-        
+
         _carConfiguratorFacade.MakeDecision(WheelId);
-        
+
         _carConfiguratorFacade.Variables.Should().HaveCount(4);
-        _carConfiguratorFacade.Variables.Should().Contain(x => x.Literal == EngineId && x.Value == false && x.Locked && !x.IsUserDecision);
+        _carConfiguratorFacade.Variables.Should()
+            .Contain(x => x.Literal == EngineId && x.Value == false && x.Locked && !x.IsUserDecision);
         _carConfiguratorFacade.Variables.Should()
             .Contain(x => x.Literal == WheelId && x.Value == true && !x.Locked && x.IsUserDecision);
     }
@@ -58,12 +59,40 @@ internal class RealTests
     [Test]
     public void ThereAreNoRequiredParts_CannotBeSatisfied()
     {
-        var wheelId = 1;
-        var engineId = 2;
-        var leatherSeatsId = 3;
-        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(wheelId, new[] { engineId, leatherSeatsId }));
-        _carConfiguratorFacade.MakeDecision(wheelId);
-        _carConfiguratorFacade.MakeDecision(engineId);
-        _carConfiguratorFacade.MakeDecision(leatherSeatsId);
+        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, new[] { EngineId, LeatherSeatsId }));
+        _carConfiguratorFacade.MakeDecision(WheelId);
+        _carConfiguratorFacade.MakeDecision(EngineId);
+        _carConfiguratorFacade.MakeDecision(LeatherSeatsId);
+    }
+
+    [Test]
+    public void RevertDecision_ShouldUnlockRequiredPart()
+    {
+        _carConfiguratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
+        _carConfiguratorFacade.MakeDecision(WheelId);
+
+        _carConfiguratorFacade.Variables.Should()
+            .Contain(x => x.Literal == EngineId && x.Value == false && x.Locked);
+        
+        _carConfiguratorFacade.RevertDecision(WheelId);
+        
+        _carConfiguratorFacade.Variables.Should()
+            .Contain(x => x.Literal == EngineId && x.Value == null && !x.Locked);
+        
+        _carConfiguratorFacade.MakeDecision(EngineId);
+        
+        _carConfiguratorFacade.Variables.Should()
+            .Contain(x => x.Literal == EngineId && x.Value == true && !x.Locked);
+
+    }
+    
+    [Test]
+    public void ShouldNotSayConfigurationIsFulfilled_IFThereAreMissingParts()
+    {
+        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId]));
+        _carConfiguratorFacade.MakeDecision(WheelId);
+
+        _carConfiguratorFacade.IsFullfilled().Should.BeFalse();
+
     }
 }

@@ -44,4 +44,10 @@ public static class DPLLSolver
 
         return Solve(clauses, assignmentWithFalse);
     }
+
+    public static bool IsFormulaSatisfied(List<List<int>> clauses, Dictionary<int, bool> assignment)
+    {
+        return clauses.All(clause => clause.Any(literal =>
+            assignment.ContainsKey(Math.Abs(literal)) && assignment[Math.Abs(literal)] == (literal > 0))
+    }
 }
