@@ -31,7 +31,7 @@ public class CarConfiguratorFacade
         //TODO: do not do it when TestVars fails
         variable.Set(true);
         _knownValues.Clear();
-        var variables =  TestVars.Exec(_knownValues, _disabledValues,
+        var variables = TestVars.Exec(_knownValues, _disabledValues,
             RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules), _variables);
         _variables = variables;
     }
@@ -42,7 +42,7 @@ public class CarConfiguratorFacade
         //TODO: do not do it when TestVars fails
         variable.Reset();
         _disabledValues.Clear();
-        var variables =  TestVars.Exec(_knownValues, _disabledValues,
+        var variables = TestVars.Exec(_knownValues, _disabledValues,
             RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules), _variables);
         _variables = variables;
     }
@@ -53,9 +53,19 @@ public class CarConfiguratorFacade
         return DPLLSolver.Solve(clauses, new Dictionary<int, bool>()) is not null;
     }
 
-    public bool IsFullfilled()
+    public bool IsFulfilled()
     {
-        var clauses = RulesAndPartsToClauses.ConvertRulesAndPartsToClauses(_includeRules, _excludeRules, partIds);
-        return DPLLSolver.Solve(clauses, new Dictionary<int, bool>()) is not null;
+        //should be fulfilled if include rule contains only one choice and it is blocked?
+        if (!_variables.Any(x => x.IsUserDecision)) return false;
+        var assignments = _variables.ToDictionary(x => x.Literal, x => x.Value ?? false);
+        return DPLLSolver.IsFormulaSatisfied
+            (RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules), assignments);
+    }
+
+    public List<List<int>> GetMissingClauses()
+    {
+        var assignments = _variables.ToDictionary(x => x.Literal, x => x.Value ?? false);
+        return DPLLSolver.GetMissingClauses(RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules),
+            assignments);
     }
 }

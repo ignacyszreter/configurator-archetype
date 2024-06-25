@@ -87,12 +87,35 @@ internal class RealTests
     }
     
     [Test]
-    public void ShouldNotSayConfigurationIsFulfilled_IFThereAreMissingParts()
+    public void ShouldNotSayConfigurationIsFulfilled_IfIncludeRuleIsOptional()
     {
-        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId]));
+        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId, LeatherSeatsId]));
+        _carConfiguratorFacade.MakeDecision(WheelId);
+        _carConfiguratorFacade.GetMissingClauses().Should().HaveCount(1);
+        _carConfiguratorFacade.GetMissingClauses()[0].Should().BeEquivalentTo([-WheelId, EngineId, LeatherSeatsId]);
+
+        _carConfiguratorFacade.IsFulfilled().Should().BeFalse();
+        
+        _carConfiguratorFacade.MakeDecision(EngineId);
+        
+        _carConfiguratorFacade.IsFulfilled().Should().BeTrue();
+        _carConfiguratorFacade.GetMissingClauses().Should().BeEmpty();
+    }
+    
+    [Test]
+    public void IsNotFulfilled_IfUserHasNotMadeAnyDecision()
+    {
+        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId, LeatherSeatsId]));
+
+        _carConfiguratorFacade.IsFulfilled().Should().BeFalse();
+    }
+    
+    [Test]
+    public void ConfigurationIsFulfilled_WhenIncludeRuleContainsOnlyOnePart_AndOnlyPartRequiringConclusionIsNeeded()
+    {
+        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [LeatherSeatsId]));
         _carConfiguratorFacade.MakeDecision(WheelId);
 
-        _carConfiguratorFacade.IsFullfilled().Should.BeFalse();
-
+        _carConfiguratorFacade.IsFulfilled().Should().BeTrue();
     }
 }
