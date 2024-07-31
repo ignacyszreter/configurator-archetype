@@ -4,7 +4,7 @@ namespace ArchetypeConfigurator.Tests;
 
 internal class RealTests
 {
-    private CarConfiguratorFacade _carConfiguratorFacade;
+    private ConfiguratorFacade _configuratorFacade;
     private const int WheelId = 1;
     private const int EngineId = 2;
     private const int LeatherSeatsId = 3;
@@ -13,109 +13,109 @@ internal class RealTests
     [SetUp]
     public void Setup()
     {
-        _carConfiguratorFacade = new CarConfiguratorFacade();
-        _carConfiguratorFacade.AddVariable(WheelId);
-        _carConfiguratorFacade.AddVariable(EngineId);
-        _carConfiguratorFacade.AddVariable(LeatherSeatsId);
-        _carConfiguratorFacade.AddVariable(RoofRackId);
+        _configuratorFacade = new ConfiguratorFacade();
+        _configuratorFacade.AddVariable(WheelId);
+        _configuratorFacade.AddVariable(EngineId);
+        _configuratorFacade.AddVariable(LeatherSeatsId);
+        _configuratorFacade.AddVariable(RoofRackId);
     }
 
     [Test]
     public void WhenLiteralIsLocked_ItCannotBeChanged()
     {
-        _carConfiguratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
-        _carConfiguratorFacade.MakeDecision(WheelId);
-        _carConfiguratorFacade.MakeDecision(LeatherSeatsId);
-        _carConfiguratorFacade.MakeDecision(RoofRackId);
-        var action = () => _carConfiguratorFacade.MakeDecision(EngineId);
+        _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
+        _configuratorFacade.PickVariable(WheelId);
+        _configuratorFacade.PickVariable(LeatherSeatsId);
+        _configuratorFacade.PickVariable(RoofRackId);
+        var action = () => _configuratorFacade.PickVariable(EngineId);
         action.Should().Throw<InvalidOperationException>().WithMessage("Cannot set locked status");
     }
 
     [Test]
     public void ShouldLockLiteral_IfItIsExcluded()
     {
-        _carConfiguratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
+        _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
 
-        _carConfiguratorFacade.MakeDecision(WheelId);
+        _configuratorFacade.PickVariable(WheelId);
 
-        _carConfiguratorFacade.Variables.Should().HaveCount(4);
-        _carConfiguratorFacade.Variables.Should()
-            .Contain(x => x.Literal == EngineId && x.Value == false && x.Locked && !x.IsUserDecision);
-        _carConfiguratorFacade.Variables.Should()
-            .Contain(x => x.Literal == WheelId && x.Value == true && !x.Locked && x.IsUserDecision);
+        _configuratorFacade.Variables.Should().HaveCount(4);
+        _configuratorFacade.Variables.Should()
+            .Contain(x => x.Id == EngineId && x.Value == false && x.Locked && !x.IsUserDecision);
+        _configuratorFacade.Variables.Should()
+            .Contain(x => x.Id == WheelId && x.Value == true && !x.Locked && x.IsUserDecision);
     }
 
     [Test]
     public void ShouldFail_IfThereIsNoSatisfyingRule()
     {
-        _carConfiguratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
-        _carConfiguratorFacade.MakeDecision(WheelId);
-        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(RoofRackId, [EngineId]));
+        _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
+        _configuratorFacade.PickVariable(WheelId);
+        _configuratorFacade.AddIncludeRule(new IncludeRule(RoofRackId, [EngineId]));
 
-        var action = () => _carConfiguratorFacade.MakeDecision(RoofRackId);
+        var action = () => _configuratorFacade.PickVariable(RoofRackId);
         action.Should().Throw<InvalidOperationException>().WithMessage("Literal is not satisfiable");
     }
 
     [Test]
     public void ThereAreNoRequiredParts_CannotBeSatisfied()
     {
-        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, new[] { EngineId, LeatherSeatsId }));
-        _carConfiguratorFacade.MakeDecision(WheelId);
-        _carConfiguratorFacade.MakeDecision(EngineId);
-        _carConfiguratorFacade.MakeDecision(LeatherSeatsId);
+        _configuratorFacade.AddIncludeRule(new IncludeRule(WheelId, new[] { EngineId, LeatherSeatsId }));
+        _configuratorFacade.PickVariable(WheelId);
+        _configuratorFacade.PickVariable(EngineId);
+        _configuratorFacade.PickVariable(LeatherSeatsId);
     }
 
     [Test]
     public void RevertDecision_ShouldUnlockRequiredPart()
     {
-        _carConfiguratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
-        _carConfiguratorFacade.MakeDecision(WheelId);
+        _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
+        _configuratorFacade.PickVariable(WheelId);
 
-        _carConfiguratorFacade.Variables.Should()
-            .Contain(x => x.Literal == EngineId && x.Value == false && x.Locked);
+        _configuratorFacade.Variables.Should()
+            .Contain(x => x.Id == EngineId && x.Value == false && x.Locked);
         
-        _carConfiguratorFacade.RevertDecision(WheelId);
+        _configuratorFacade.RevertDecision(WheelId);
         
-        _carConfiguratorFacade.Variables.Should()
-            .Contain(x => x.Literal == EngineId && x.Value == null && !x.Locked);
+        _configuratorFacade.Variables.Should()
+            .Contain(x => x.Id == EngineId && x.Value == null && !x.Locked);
         
-        _carConfiguratorFacade.MakeDecision(EngineId);
+        _configuratorFacade.PickVariable(EngineId);
         
-        _carConfiguratorFacade.Variables.Should()
-            .Contain(x => x.Literal == EngineId && x.Value == true && !x.Locked);
+        _configuratorFacade.Variables.Should()
+            .Contain(x => x.Id == EngineId && x.Value == true && !x.Locked);
 
     }
     
     [Test]
     public void ShouldNotSayConfigurationIsFulfilled_IfIncludeRuleIsOptional()
     {
-        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId, LeatherSeatsId]));
-        _carConfiguratorFacade.MakeDecision(WheelId);
-        _carConfiguratorFacade.GetMissingClauses().Should().HaveCount(1);
-        _carConfiguratorFacade.GetMissingClauses()[0].Should().BeEquivalentTo([-WheelId, EngineId, LeatherSeatsId]);
+        _configuratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId, LeatherSeatsId]));
+        _configuratorFacade.PickVariable(WheelId);
+        _configuratorFacade.GetMissingClauses().Should().HaveCount(1);
+        _configuratorFacade.GetMissingClauses()[0].Should().BeEquivalentTo([-WheelId, EngineId, LeatherSeatsId]);
 
-        _carConfiguratorFacade.IsFulfilled().Should().BeFalse();
+        _configuratorFacade.IsFulfilled().Should().BeFalse();
         
-        _carConfiguratorFacade.MakeDecision(EngineId);
+        _configuratorFacade.PickVariable(EngineId);
         
-        _carConfiguratorFacade.IsFulfilled().Should().BeTrue();
-        _carConfiguratorFacade.GetMissingClauses().Should().BeEmpty();
+        _configuratorFacade.IsFulfilled().Should().BeTrue();
+        _configuratorFacade.GetMissingClauses().Should().BeEmpty();
     }
     
     [Test]
     public void IsNotFulfilled_IfUserHasNotMadeAnyDecision()
     {
-        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId, LeatherSeatsId]));
+        _configuratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId, LeatherSeatsId]));
 
-        _carConfiguratorFacade.IsFulfilled().Should().BeFalse();
+        _configuratorFacade.IsFulfilled().Should().BeFalse();
     }
     
     [Test]
     public void ConfigurationIsFulfilled_WhenIncludeRuleContainsOnlyOnePart_AndOnlyPartRequiringConclusionIsNeeded()
     {
-        _carConfiguratorFacade.AddIncludeRule(new IncludeRule(WheelId, [LeatherSeatsId]));
-        _carConfiguratorFacade.MakeDecision(WheelId);
+        _configuratorFacade.AddIncludeRule(new IncludeRule(WheelId, [LeatherSeatsId]));
+        _configuratorFacade.PickVariable(WheelId);
 
-        _carConfiguratorFacade.IsFulfilled().Should().BeTrue();
+        _configuratorFacade.IsFulfilled().Should().BeTrue();
     }
 }

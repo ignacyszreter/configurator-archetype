@@ -1,11 +1,11 @@
 ﻿namespace ArchetypeConfigurator;
 
-public class Variable
+public class Variables
 {
     public bool Locked { get; private set; }
     public bool? Value { get; private set; }
-    public int Literal { get; }
-    public bool IsUserDecision => !Locked && Value.HasValue && Value.Value ;
+    public int Id { get; }
+    public bool IsUserDecision => !Locked && Value.HasValue && Value.Value;
 
     public void Lock()
     {
@@ -31,23 +31,16 @@ public class Variable
         Value = value;
     }
 
-    public Variable(int literal)
+    public Variables(int id)
     {
-        Literal = literal;
+        Id = id;
         Locked = false;
         Value = null;
     }
 
-    public Variable(int literal, bool? value)
+    protected bool Equals(Variables other)
     {
-        Value = value;
-        Literal = literal;
-        Locked = false;
-    }
-
-    protected bool Equals(Variable other)
-    {
-        return Locked == other.Locked && Value == other.Value && Literal == other.Literal;
+        return Locked == other.Locked && Value == other.Value && Id == other.Id;
     }
 
     public override bool Equals(object? obj)
@@ -55,11 +48,11 @@ public class Variable
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Literal == ((Variable)obj).Literal;
+        return Id == ((Variables)obj).Id;
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Literal);
+        return HashCode.Combine(Id);
     }
 }

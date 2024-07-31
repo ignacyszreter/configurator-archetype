@@ -2,14 +2,14 @@
 
 public record IncludeRule
 {
-    public IncludeRule(int id, IReadOnlyCollection<int> requiredParts)
+    public IncludeRule(int id, IReadOnlyCollection<int> requiredVariables)
     {
         Id = id;
-        RequiredParts = requiredParts;
+        RequiredVariables = requiredVariables;
     }
 
     public int Id { get; init; }
 
     //only one of the required parts must be present
-    public IReadOnlyCollection<int> RequiredParts { get; init; }
+    public IReadOnlyCollection<int> RequiredVariables { get; init; }
 }
