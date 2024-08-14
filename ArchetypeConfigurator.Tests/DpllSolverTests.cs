@@ -17,13 +17,13 @@ internal class DpllSolverTests
     [Parallelizable(ParallelScope.Self)]
     public void Testt(string fileName, bool sat)
     {
-        var filePath = Path.Combine("TestCases", $"{fileName}.txt");
+        var filePath = Path.Combine("SatTestCases", $"{fileName}.txt");
         var clauses = LoadClauses(filePath);
         var result = DPLLSolver.Solve(clauses, new Dictionary<int, bool>());
         Assert.That(result is not null == sat);
     }
     
-    public List<List<int>> LoadClauses(string filePath)
+    private List<List<int>> LoadClauses(string filePath)
     {
         var clauses = new List<List<int>>();
         var lines = File.ReadAllLines(filePath);

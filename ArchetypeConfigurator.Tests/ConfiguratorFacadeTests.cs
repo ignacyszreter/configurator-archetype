@@ -2,7 +2,7 @@
 
 namespace ArchetypeConfigurator.Tests;
 
-internal class RealTests
+internal class ConfiguratorFacadeTests
 {
     private ConfiguratorFacade _configuratorFacade;
     private const int WheelId = 1;
@@ -21,7 +21,7 @@ internal class RealTests
     }
 
     [Test]
-    public void WhenLiteralIsLocked_ItCannotBeChanged()
+    public void VariableIsLocked_ItCannotBePicked()
     {
         _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
         _configuratorFacade.PickVariable(WheelId);
@@ -32,7 +32,7 @@ internal class RealTests
     }
 
     [Test]
-    public void ShouldLockLiteral_IfItIsExcluded()
+    public void ShouldLockVariable_IfItIsExcluded()
     {
         _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
 
@@ -57,16 +57,7 @@ internal class RealTests
     }
 
     [Test]
-    public void ThereAreNoRequiredParts_CannotBeSatisfied()
-    {
-        _configuratorFacade.AddIncludeRule(new IncludeRule(WheelId, new[] { EngineId, LeatherSeatsId }));
-        _configuratorFacade.PickVariable(WheelId);
-        _configuratorFacade.PickVariable(EngineId);
-        _configuratorFacade.PickVariable(LeatherSeatsId);
-    }
-
-    [Test]
-    public void RevertDecision_ShouldUnlockRequiredPart()
+    public void PickVariableThatExcludesAnother_RevertDecision_ShouldUnlockExcludedVariable()
     {
         _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
         _configuratorFacade.PickVariable(WheelId);
@@ -87,7 +78,7 @@ internal class RealTests
     }
     
     [Test]
-    public void ShouldNotSayConfigurationIsFulfilled_IfIncludeRuleIsOptional()
+    public void IncludeRuleIsOptional_OneVariableIsEnoughToFulfill()
     {
         _configuratorFacade.AddIncludeRule(new IncludeRule(WheelId, [EngineId, LeatherSeatsId]));
         _configuratorFacade.PickVariable(WheelId);
@@ -111,7 +102,7 @@ internal class RealTests
     }
     
     [Test]
-    public void ConfigurationIsFulfilled_WhenIncludeRuleContainsOnlyOnePart_AndOnlyPartRequiringConclusionIsNeeded()
+    public void ConfigurationIsFulfilled_WhenIncludeRuleContainsOnlyOneVariable_AndRequiredVariable()
     {
         _configuratorFacade.AddIncludeRule(new IncludeRule(WheelId, [LeatherSeatsId]));
         _configuratorFacade.PickVariable(WheelId);

@@ -27,6 +27,7 @@ public class ConfiguratorFacade
     public void PickVariable(int variableId)
     {
         var variable = _variables.First(x => x.Id == variableId);
+        var clonedVariables = new HashSet<Variables>(_variables);
         //TODO: do not do it when TestVars fails
         variable.Set(true);
         _knownValues.Clear();
