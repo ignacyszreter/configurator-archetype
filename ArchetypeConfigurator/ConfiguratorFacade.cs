@@ -28,7 +28,7 @@ public class ConfiguratorFacade
     {
         var variable = _variables.First(x => x.Id == variableId);
         var clonedVariables = new HashSet<Variables>(_variables);
-        //TODO: do not do it when TestVars fails
+        //TODO: do not do it when CheckCurrentDecisionSetFunction fails
         variable.Set(true);
         _knownValues.Clear();
         var variables = CheckCurrentDecisionSetFunction.Exec(_knownValues, _disabledValues,
@@ -39,7 +39,7 @@ public class ConfiguratorFacade
     public void RevertDecision(int variableId)
     {
         var variable = _variables.First(x => x.Id == variableId);
-        //TODO: do not do it when TestVars fails
+        //TODO: do not do it when CheckCurrentDecisionSetFunction fails
         variable.Reset();
         _disabledValues.Clear();
         var variables = CheckCurrentDecisionSetFunction.Exec(_knownValues, _disabledValues,
