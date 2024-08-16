@@ -2,8 +2,8 @@
 
 internal static class CheckCurrentDecisionSetFunction
 {
-    public static HashSet<Variables> Exec(HashSet<int> knownValues, HashSet<int> disabledValues, List<List<int>> clauses,
-        HashSet<Variables> variables)
+    public static HashSet<Variable> Exec(HashSet<int> knownValues, HashSet<int> disabledValues, List<List<int>> clauses,
+        HashSet<Variable> variables)
     {
         var userDecisions = variables.Where(x => x.IsUserDecision).ToHashSet();
         foreach (var unassignedVariable in variables.Where(x => !userDecisions.Contains(x)))
@@ -27,7 +27,7 @@ internal static class CheckCurrentDecisionSetFunction
         return variables;
     }
 
-    private static List<List<int>> GetFormula(List<List<int>> clauses, HashSet<Variables> decisions)
+    private static List<List<int>> GetFormula(List<List<int>> clauses, HashSet<Variable> decisions)
     {
         var formula = new List<List<int>>();
         foreach (var decision in decisions)

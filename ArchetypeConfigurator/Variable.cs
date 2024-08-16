@@ -1,6 +1,6 @@
 ﻿namespace ArchetypeConfigurator;
 
-public class Variables
+public class Variable
 {
     public bool Locked { get; private set; }
     public bool? Value { get; private set; }
@@ -31,14 +31,14 @@ public class Variables
         Value = value;
     }
 
-    public Variables(int id)
+    public Variable(int id)
     {
         Id = id;
         Locked = false;
         Value = null;
     }
 
-    protected bool Equals(Variables other)
+    protected bool Equals(Variable other)
     {
         return Locked == other.Locked && Value == other.Value && Id == other.Id;
     }
@@ -48,7 +48,7 @@ public class Variables
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
         if (obj.GetType() != this.GetType()) return false;
-        return Id == ((Variables)obj).Id;
+        return Id == ((Variable)obj).Id;
     }
 
     public override int GetHashCode()

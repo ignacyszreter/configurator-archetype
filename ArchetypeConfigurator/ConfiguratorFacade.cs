@@ -6,8 +6,8 @@ public class ConfiguratorFacade
     private readonly List<ExcludeRule> _excludeRules = new List<ExcludeRule>();
     private HashSet<int> _knownValues = new HashSet<int>();
     private HashSet<int> _disabledValues = new HashSet<int>();
-    private HashSet<Variables> _variables = new HashSet<Variables>();
-    public IReadOnlySet<Variables> Variables => _variables;
+    private HashSet<Variable> _variables = new HashSet<Variable>();
+    public IReadOnlySet<Variable> Variables => _variables;
     
     public void AddIncludeRule(IncludeRule rule)
     {
@@ -21,13 +21,13 @@ public class ConfiguratorFacade
 
     public void AddVariable(int id)
     {
-        _variables.Add(new Variables(id));
+        _variables.Add(new Variable(id));
     }
 
     public void PickVariable(int variableId)
     {
         var variable = _variables.First(x => x.Id == variableId);
-        var clonedVariables = new HashSet<Variables>(_variables);
+        var clonedVariables = new HashSet<Variable>(_variables);
         //TODO: do not do it when CheckCurrentDecisionSetFunction fails
         variable.Set(true);
         _knownValues.Clear();
