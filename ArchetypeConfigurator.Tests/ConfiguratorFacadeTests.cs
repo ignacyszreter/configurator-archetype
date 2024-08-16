@@ -57,6 +57,19 @@ internal class ConfiguratorFacadeTests
     }
 
     [Test]
+    public void PickingVariablesFails_ShouldNotHaveSideEffects()
+    {
+        _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
+        _configuratorFacade.PickVariable(WheelId);
+        _configuratorFacade.AddIncludeRule(new IncludeRule(RoofRackId, [EngineId]));
+
+        var action = () => _configuratorFacade.PickVariable(RoofRackId);
+        action.Should().Throw<InvalidOperationException>().WithMessage("Literal is not satisfiable");
+        _configuratorFacade.GetMissingClauses().Should().BeEmpty();
+    }
+
+
+    [Test]
     public void PickVariableThatExcludesAnother_RevertDecision_ShouldUnlockExcludedVariable()
     {
         _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
@@ -64,19 +77,18 @@ internal class ConfiguratorFacadeTests
 
         _configuratorFacade.Variables.Should()
             .Contain(x => x.Id == EngineId && x.Value == false && x.Locked);
-        
+
         _configuratorFacade.RevertDecision(WheelId);
-        
+
         _configuratorFacade.Variables.Should()
             .Contain(x => x.Id == EngineId && x.Value == null && !x.Locked);
-        
+
         _configuratorFacade.PickVariable(EngineId);
-        
+
         _configuratorFacade.Variables.Should()
             .Contain(x => x.Id == EngineId && x.Value == true && !x.Locked);
-
     }
-    
+
     [Test]
     public void IncludeRuleIsOptional_OneVariableIsEnoughToFulfill()
     {
@@ -86,13 +98,13 @@ internal class ConfiguratorFacadeTests
         _configuratorFacade.GetMissingClauses()[0].Should().BeEquivalentTo([-WheelId, EngineId, LeatherSeatsId]);
 
         _configuratorFacade.IsFulfilled().Should().BeFalse();
-        
+
         _configuratorFacade.PickVariable(EngineId);
-        
+
         _configuratorFacade.IsFulfilled().Should().BeTrue();
         _configuratorFacade.GetMissingClauses().Should().BeEmpty();
     }
-    
+
     [Test]
     public void IsNotFulfilled_IfUserHasNotMadeAnyDecision()
     {
@@ -100,7 +112,7 @@ internal class ConfiguratorFacadeTests
 
         _configuratorFacade.IsFulfilled().Should().BeFalse();
     }
-    
+
     [Test]
     public void ConfigurationIsFulfilled_WhenIncludeRuleContainsOnlyOneVariable_AndRequiredVariable()
     {

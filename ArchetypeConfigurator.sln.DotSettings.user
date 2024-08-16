@@ -15,6 +15,8 @@
       &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.CarConfiguratorFacadeTests&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.RealTests.Test1&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.ConfiguratorFacadeTests.ThereAreNoRequiredParts_CannotBeSatisfied&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.ConfiguratorFacadeTests.PickingVariablesFails_ShouldNotHaveSideEffects&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.ConfiguratorFacadeTests&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
     &lt;ProjectFile&gt;7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0/f:RealTests.cs&lt;/ProjectFile&gt;&#xD;
   &lt;/Or&gt;&#xD;
