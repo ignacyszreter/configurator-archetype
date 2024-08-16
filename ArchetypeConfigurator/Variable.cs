@@ -1,4 +1,6 @@
-﻿namespace ArchetypeConfigurator;
+﻿using System.Text.Json.Serialization;
+
+namespace ArchetypeConfigurator;
 
 public class Variable
 {
@@ -6,6 +8,14 @@ public class Variable
     public bool? Value { get; private set; }
     public int Id { get; }
     public bool IsUserDecision => !Locked && Value.HasValue && Value.Value;
+
+    [JsonConstructor]
+    private Variable(bool locked, bool? value, int id)
+    {
+        Locked = locked;
+        Value = value;
+        Id = id;
+    }
 
     public void Lock()
     {
@@ -36,11 +46,6 @@ public class Variable
         Id = id;
         Locked = false;
         Value = null;
-    }
-
-    protected bool Equals(Variable other)
-    {
-        return Locked == other.Locked && Value == other.Value && Id == other.Id;
     }
 
     public override bool Equals(object? obj)

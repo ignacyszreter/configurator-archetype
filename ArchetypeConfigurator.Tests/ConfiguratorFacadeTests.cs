@@ -13,7 +13,7 @@ internal class ConfiguratorFacadeTests
     [SetUp]
     public void Setup()
     {
-        _configuratorFacade = new ConfiguratorFacade();
+        _configuratorFacade = new ConfiguratorFacade(new InMemoryVariablesRepository());
         _configuratorFacade.AddVariable(WheelId);
         _configuratorFacade.AddVariable(EngineId);
         _configuratorFacade.AddVariable(LeatherSeatsId);
