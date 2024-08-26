@@ -10,6 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="6.12.0" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0"/>
         <PackageReference Include="NUnit" Version="3.13.3"/>
         <PackageReference Include="NUnit3TestAdapter" Version="4.2.1"/>
@@ -22,35 +23,35 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="TestCases\47Variables_324Clauses_UNSAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\2Variables_3Clauses_SAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\2Variables_3Clauses_SAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\1Variable_2Clauses_UNSAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\3Variables_8Clauses_UNSAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\3Variables_8Clauses_UNSAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\12Variables_36Clauses_SAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\12Variables_36Clauses_SAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\12Variables_36Clauses_UNSAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\12Variables_36Clauses_UNSAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\78Variables_364Clauses_SAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\23Variables_75Clauses_SAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\138Variables_519Clauses_UNSAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\47Variables_324Clauses_UNSAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\138Variables_519Clauses_SAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\78Variables_364Clauses_SAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\1Variable_2Clauses_UNSAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\138Variables_519Clauses_SAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="TestCases\23Variables_75Clauses_SAT.txt">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="SatTestCases\138Variables_519Clauses_UNSAT.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 
