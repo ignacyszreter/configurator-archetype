@@ -16,12 +16,10 @@ internal static class CheckCurrentDecisionSetFunction
             if (canBeTrue && canBeFalse)
             {
                 unassignedVariable.UnlockAndReset();
-                // decisions.Single(x => x.Equals(status)).UnlockAndReset();;
             }
             else
             {
                 unassignedVariable.Lock();
-                // decisions.Single(x => x.Equals(status)).Lock();
             }
         }
         return variables;

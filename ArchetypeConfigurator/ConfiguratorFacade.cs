@@ -40,7 +40,7 @@ public class ConfiguratorFacade
         variable.Set(true);
         _knownValues.Clear();
         var newVariables = CheckCurrentDecisionSetFunction.Exec(_knownValues, _disabledValues,
-            RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules), variables);
+            RulesToClauses.Exec(_includeRules, _excludeRules), variables);
         _variablesRepository.Save(newVariables);
     }
 
@@ -51,7 +51,7 @@ public class ConfiguratorFacade
         variable.Reset();
         _disabledValues.Clear();
         var newVariables = CheckCurrentDecisionSetFunction.Exec(_knownValues, _disabledValues,
-            RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules), variables);
+            RulesToClauses.Exec(_includeRules, _excludeRules), variables);
         _variablesRepository.Save(newVariables);
     }
 
@@ -62,13 +62,13 @@ public class ConfiguratorFacade
         if (!variables.Any(x => x.IsUserDecision)) return false;
         var assignments = variables.ToDictionary(x => x.Id, x => x.Value ?? false);
         return DPLLSolver.IsFormulaSatisfied
-            (RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules), assignments);
+            (RulesToClauses.Exec(_includeRules, _excludeRules), assignments);
     }
 
     public List<List<int>> GetMissingClauses()
     {
         var assignments = _variablesRepository.GetVariables().ToDictionary(x => x.Id, x => x.Value ?? false);
-        return DPLLSolver.GetMissingClauses(RulesAndPartsToClauses.ConvertRulesToClauses(_includeRules, _excludeRules),
+        return DPLLSolver.GetMissingClauses(RulesToClauses.Exec(_includeRules, _excludeRules),
             assignments);
     }
 }

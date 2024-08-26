@@ -1,8 +1,8 @@
 ﻿namespace ArchetypeConfigurator;
 
-internal static class RulesAndPartsToClauses
+internal static class RulesToClauses
 {
-    public static List<List<int>> ConvertRulesToClauses(IReadOnlyCollection<IncludeRule> includeRules,
+    public static List<List<int>> Exec(IReadOnlyCollection<IncludeRule> includeRules,
         IReadOnlyCollection<ExcludeRule> excludeRules)
     {
         var clauses = new List<List<int>>();
