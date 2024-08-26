@@ -36,7 +36,6 @@ public class ConfiguratorFacade
     {
         var variables = _variablesRepository.GetVariables();
         var variable = variables.First(x => x.Id == variableId);
-        //TODO: do not do it when CheckCurrentDecisionSetFunction fails
         variable.Set(true);
         _knownValues.Clear();
         var newVariables = CheckCurrentDecisionSetFunction.Exec(_knownValues, _disabledValues,
