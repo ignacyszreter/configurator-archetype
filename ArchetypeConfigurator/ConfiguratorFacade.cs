@@ -70,4 +70,11 @@ public class ConfiguratorFacade
         return DPLLSolver.GetMissingClauses(RulesToClauses.Exec(_includeRules, _excludeRules),
             assignments);
     }
+
+    public List<int> GetAvailablePicks()
+    {
+        return _variablesRepository.GetVariables().Where(x => x is { Locked: false, IsUserDecision: false })
+            .Select(x => x.Id)
+            .ToList();
+    }
 }

@@ -23,12 +23,28 @@ internal class ConfiguratorFacadeTests
     [Test]
     public void VariableIsLocked_ItCannotBePicked()
     {
+        //given
         _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
         _configuratorFacade.PickVariable(WheelId);
         _configuratorFacade.PickVariable(LeatherSeatsId);
         _configuratorFacade.PickVariable(RoofRackId);
+        
+        //when
         var action = () => _configuratorFacade.PickVariable(EngineId);
+        
+        //then
         action.Should().Throw<InvalidOperationException>().WithMessage("Cannot set locked status");
+    }
+
+    [Test]
+    public void ShouldNotReturnLockedAndChosenVariablesAsAvailable()
+    {
+        _configuratorFacade.GetAvailablePicks().Should().BeEquivalentTo([WheelId, EngineId, LeatherSeatsId, RoofRackId]);
+        
+        _configuratorFacade.AddExcludeRule(new ExcludeRule(WheelId, EngineId));
+        _configuratorFacade.PickVariable(WheelId);
+        
+        _configuratorFacade.GetAvailablePicks().Should().BeEquivalentTo([LeatherSeatsId, RoofRackId]);
     }
 
     [Test]
