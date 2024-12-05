@@ -1,16 +1,23 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">C:\Users\ignacy.szreter\AppData\Local\JetBrains\Rider2024.1\resharper-host\temp\Rider\vAny\CoverageData\_ArchetypeConfigurator.1245633169\Snapshot\snapshot.utdcvr</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8bf686fc_002Da925_002D40d4_002D810b_002D33d3a711c5c7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.Tests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.Testt&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.Test2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestUnsatCase4&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestUnsatCase5&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestComplexUnsatScenario&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestAnotherComplexUnsatScenario&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.CarConfiguratorFacadeTests.TwoExcludingParts_CannotBeSatisfied&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.CarConfiguratorFacadeTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.Tests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.Testt&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.Test2&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestUnsatCase4&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestUnsatCase5&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestComplexUnsatScenario&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests.TestAnotherComplexUnsatScenario&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.DpllSolverTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.CarConfiguratorFacadeTests.TwoExcludingParts_CannotBeSatisfied&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.CarConfiguratorFacadeTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.RealTests.Test1&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.ConfiguratorFacadeTests.ThereAreNoRequiredParts_CannotBeSatisfied&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.ConfiguratorFacadeTests.PickingVariablesFails_ShouldNotHaveSideEffects&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0::net8.0::ArchetypeConfigurator.Tests.ConfiguratorFacadeTests&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;ProjectFile&gt;7D2ED39D-9E00-4314-93DC-9E6FA69BF2E0/f:RealTests.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
